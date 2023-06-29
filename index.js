@@ -1,13 +1,34 @@
 const TelegramBot = require("node-telegram-bot-api");
 require("dotenv").config();
+const express = require('express');
+const cors = require('cors');
 
+const PORT = 8000;
 const token = process.env.TELEGRAM_BOT_TOKEN;
 const bot = new TelegramBot(token, { polling: true });
+const webAppUrl = process.env.WEB_URL;
+const app = express();
+app.use(express.json());
+app.use(cors());
 
-bot.on("message", (msg) => {
+bot.on("message", async (msg) => {
   const chatId = msg.chat.id;
-  bot.sendMessage(
+  const text = msg.text;
+
+  await bot.sendMessage(
     chatId,
-    `Вітаю ${msg.from.first_name}! Все що я зараз можу це повторювати за тобою, ${msg.text}`
-  );
+    `${msg.text}
+    Вітаю ${msg.from.first_name}! Все що я зараз можу, це повторювати за тобою, напиши команду /start і роби замовлення`)
+
+    if(text === '/start'){
+    await bot.sendMessage(chatId, 'Ласкаво просимо', {
+      reply_markup: {
+          inline_keyboard: [
+              [{text: 'Зробити замовлення', web_app: {url: webAppUrl}}]
+          ]
+      }
+  })
+  }
 });
+
+app.listen(PORT, () => console.log('server started on PORT' + PORT))
