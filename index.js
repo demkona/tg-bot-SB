@@ -20,6 +20,12 @@ bot.on("message", async (msg) => {
   const chatId = msg.chat.id;
   const text = msg.text;
 
+  if(bot.isPolling()) {
+    await bot.stopPolling();
+    }
+    await bot.startPolling();
+
+
   await bot.sendMessage(
     chatId,
     `${msg.text}
@@ -34,6 +40,7 @@ bot.on("message", async (msg) => {
       }
   })
   }
+  await bot.stopPolling();
 });
 
 app.listen(port, () => console.log('server started on port:' + port))
