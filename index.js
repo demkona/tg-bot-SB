@@ -3,7 +3,7 @@ require("dotenv").config();
 const express = require('express');
 const cors = require('cors');
 
-const PORT = 8000;
+const port = precess.env.PORT;
 const token = process.env.TELEGRAM_BOT_TOKEN;
 const bot = new TelegramBot(token, { polling: true });
 const webAppUrl = process.env.WEB_URL;
@@ -31,4 +31,4 @@ bot.on("message", async (msg) => {
   }
 });
 
-app.listen(PORT, () => console.log('server started on PORT' + PORT))
+app.listen(port, () => console.log('server started on port' + port))
