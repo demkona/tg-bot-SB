@@ -3,6 +3,11 @@ require("dotenv").config();
 const express = require('express');
 const cors = require('cors');
 
+const Promise = require('bluebird');
+  Promise.config({
+    cancellation: true
+  });
+
 const port = process.env.PORT;
 const token = process.env.TELEGRAM_BOT_TOKEN;
 const bot = new TelegramBot(token, { polling: true });
@@ -31,4 +36,4 @@ bot.on("message", async (msg) => {
   }
 });
 
-app.listen(port, () => console.log('server started on port' + port))
+app.listen(port, () => console.log('server started on port:' + port))
