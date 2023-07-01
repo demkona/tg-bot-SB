@@ -17,7 +17,7 @@ bot.on("message", async (msg) => {
   await bot.sendMessage(
     chatId,
     `${msg.text}
-    Вітаю ${msg.from.first_name}! Все що я зараз можу, це повторювати за тобою, напиши команду /start і роби замовлення`)
+    Вітаю ${msg.from.first_name}! Все що я зараз можу, це повторювати за тобою, напиши команду /start і роби замовлення, або переходь на наш сайт за посиланням https://smachna-brusketka.vercel.app`)
     if(text === '/start'){
     await bot.sendMessage(chatId, 'Ласкаво просимо', {
       reply_markup: {
