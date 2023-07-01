@@ -19,7 +19,7 @@ bot.on("message", async (msg) => {
     `${msg.text}
     Вітаю ${msg.from.first_name}! Все що я зараз можу, це повторювати за тобою, напиши команду /start і роби замовлення`)
     if(text === '/start'){
-    await bot.sendMessage(chatId, {
+    await bot.sendMessage(chatId, 'Ласкаво просимо', {
       reply_markup: {
           inline_keyboard: [
               [{text: 'Зробити замовлення', web_app: {url: webAppUrl}}]
